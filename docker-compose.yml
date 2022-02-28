@@ -1,0 +1,21 @@
+version: '2'
+volumes:
+    webapp-data:
+    db-data:
+services:
+  web-app:
+    restart: always
+    build: ./webapp
+    volumes:
+      - 'webapp-data:/data'
+    privileged: true
+    ports:
+      - 443:5000
+  mysql:
+    build: ./database
+    restart: always
+    volumes:
+        - 'db-data:/var/lib/mysql'
+    ports:
+        - '3306'
+    
